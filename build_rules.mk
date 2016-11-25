@@ -69,6 +69,7 @@ $(BUILD_DIR)/%.o: %.c build_config.mk
 
 ## Build information
 $(TARGET).build:: $(OBJS)
+	@mkdir -p bin
 	@echo "\tDate:     `date '+%d/%m/%y %T'`" > $@
 	@echo "\tName:     $(notdir $(TARGET))" >> $@
 	@echo "\tArch:     $(ARCH)" >> $@
@@ -88,7 +89,7 @@ endif
 ## Clean project
 clean::
 	@echo "Cleaning build..."
-	@$(RM) -r build
+	@$(RM) -r build bin
 ifneq ($(TARGET),)
 	@rm -f $(TARGET) $(TARGET).build
 endif
