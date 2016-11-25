@@ -1,0 +1,9 @@
+:cmock:
+    :mock_path: test/unit/mocks
+    :verbosity: 0
+    :plugins:
+        - :ignore
+        - :ignore_arg
+        - :array
+        - :callback
+        - :return_thru_ptr
