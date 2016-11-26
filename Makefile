@@ -4,9 +4,6 @@ include test/framework/test.mk
 
 all: pre-build $(TARGET)
 
-variable:
-	@echo "$($(VAR))"
-
 # Commands to be run before the build
 pre-build::
 

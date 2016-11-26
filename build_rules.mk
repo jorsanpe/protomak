@@ -1,6 +1,24 @@
-.DEFAULT_GOAL := all
+## Default architecture is native
+ifeq ($(ARCH),)
+ARCH := $(shell uname -m)
+endif
+
+## ARCH definitions
+ifeq ($(ARCH), $(shell uname -m))
+CROSS_COMPILER := 
+endif
+
+export ARCH
 
 NON_BUILD_RULES := clean
+.DEFAULT_GOAL := all
+
+CC:=$(CROSS_COMPILER)gcc
+C++:=$(CROSS_COMPILER)g++
+CPP:=$(CROSS_COMPILER)cpp
+AR:=$(CROSS_COMPILER)ar
+OBJCOPY:=$(CROSS_COMPILER)objcopy
+LD:=$(CROSS_COMPILER)ld
 
 ## OS definitions
 ifeq ($(OS),Windows_NT)
@@ -13,15 +31,7 @@ else
     endif
 endif
 
-export ARCH
-
-CC:=$(CROSS_COMPILE)gcc
-C++:=$(CROSS_COMPILE)g++
-CPP:=$(CROSS_COMPILE)cpp
-AR:=$(CROSS_COMPILE)ar
-OBJCOPY:=$(CROSS_COMPILE)objcopy
-LD:=$(CROSS_COMPILE)ld
-
+## Compilation verbose
 ifndef V
 VCC=@echo '\tCC $<';
 VLD=@echo '\tLD $@';

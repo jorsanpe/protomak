@@ -7,6 +7,6 @@ test_with_mock =
 MOCK_HEADERS = include/module.h
 
 
-## Define this if you want to select the tests to run
+## Define this if you want to selectively run tests
 ## or leave empty if you want to run all tests
 TESTS_TO_RUN :=

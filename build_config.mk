@@ -1,11 +1,9 @@
 NAME := hello
 
-ARCH := x86
-
 # non-recursive list of source paths
 SOURCE_PATHS += src
 
-# non-recursive list of source paths
+# non-recursive list of include paths
 INCLUDE_PATHS += include
 
 # External libraries to be linked
@@ -20,9 +18,10 @@ SYMBOLS +=
 # Files to be excluded from the compilation
 EXCLUDED_FILES +=
 
+# Compiler flags for specific files
+# <filename> = flags
+
 CFLAGS +=
 
 LDFLAGS +=
 
-# Compiler flags for specific files
-# <filename> = flags
