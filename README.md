@@ -25,7 +25,6 @@ Protomak uses the following layout for the project files:
 The configuration of the build is performed through `build_config.mk`. The following variables are available:
 
  * `NAME`. Name of the application. The name will be used to generate the binary at the directory `bin`.
- * `ARCH`. The target architecture. As there are so many compilers out there, Protomak only supports native builds with `gcc` and `clang`. In order to cross compile, please read the section Cross Compiling below.
  * `SOURCE_PATHS`. Non-recursive list of paths where to find the source files.
  * `INCLUDE_PATHS`. Non-recursive list of include directories.
  * `LIBRARIES`. List of libraries with which to link the application. The library names have to be defined using its bare names. For example, use `pthread` in order to link with the pthread library.
