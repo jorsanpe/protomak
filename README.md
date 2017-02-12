@@ -8,6 +8,10 @@ solution for building C projects. Its features are:
  will have to be configured at `build_rules.mk`.
  * Embedded unit testing and mocking for C based on ThrowTheSwitch Unity and CMock tools.
 
+# Starting a new project with Protomak
+
+Simply fork this repository.
+
 # Directory Layout
 
 Protomak uses the following layout for the project files:
