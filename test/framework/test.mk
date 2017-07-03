@@ -22,7 +22,7 @@ CFLAGS += -I$(UNITY_ROOT)/src -I$(CMOCK_ROOT)/src -I$(UNIT)/mocks
 $(CMOCK_ROOT)/src/cmock.c = -fno-strict-aliasing
 
 ifneq ($(MOCK_HEADERS),)
-MOCKS_LIB := $(MOCKS_ROOT)/libmock.a
+MOCKS_LIB := $(MOCKS_ROOT)/mocks.o
 MOCKS_SRC := $(patsubst %.h, $(MOCKS_ROOT)/Mock%.c, $(notdir $(MOCK_HEADERS)))
 MOCKS_OBJ := $(patsubst %.c, %.o, $(MOCKS_SRC))
 
@@ -32,7 +32,9 @@ $(MOCKS_SRC): $(MOCK_HEADERS)
 	@ruby $(CMOCK_ROOT)/lib/cmock.rb -otest/framework/cmock_conf.yml --mock_path="$(MOCKS_ROOT)" $(MOCK_HEADERS)
 
 $(MOCKS_LIB): $(MOCKS_OBJ)
-	$(VAR)$(AR) cr $@ $(MOCKS_OBJ)
+	$(VLD)$(LD) -r -o $@ $(MOCKS_OBJ)
+	$(OBJCOPY) --weaken $@
+	
 endif #($(MOCK_HEADERS),)
 
 
@@ -53,7 +55,7 @@ unit: $(TEST_CASES) $(UNITY_ROOT) $(CMOCK_ROOT)
 	@for t in $(TEST_CASES); do \
 		./$$t; \
 	done | tee .test_results.txt;
-	@ruby $(UNITY_ROOT)/auto/parseOutput.rb -xml .test_results.txt > /dev/null
+	@ruby $(UNITY_ROOT)/auto/parse_output.rb -xml .test_results.txt > /dev/null
 	@$(RM) .test_results.txt
 
 endif  # ifneq (,$(findstring unit,$(MAKECMDGOALS)))
